@@ -9,7 +9,7 @@ namespace ECommerce.Domain.Interfaces
         T GetById(int id);
 
         T Get(Expression<Func<T, bool>> predicate);
-        List<T> GetAll(Expression<Func<T, bool>>? predicate);
+        List<T> GetAll(Expression<Func<T, bool>>? predicate, bool AsNoTracking);
         void Add(T entity);
         void Update(T entity);
         void Remove(T entity);

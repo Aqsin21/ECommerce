@@ -13,6 +13,10 @@
 
         public string? Description { get; set; }
 
+        public int StockQuantity { get; set; }
+
+        
+
 
         public bool  IsValid()
         { 
