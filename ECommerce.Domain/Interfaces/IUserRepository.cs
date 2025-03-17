@@ -3,7 +3,7 @@
 
 namespace ECommerce.Domain.Interfaces
 {
-    public interface ICustomerRepository:IRepository<Customer>
+    public interface IUserRepository:IRepository<User>
     {
 
     }

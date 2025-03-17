@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.Domain.Entities
 {
-    public  class Customer:Entity
+    public  class User:Entity
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
