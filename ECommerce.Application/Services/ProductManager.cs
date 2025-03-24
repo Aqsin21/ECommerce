@@ -11,7 +11,7 @@ namespace ECommerce.Application.Services
     {
         private readonly IProductRepository _repository;
 
-        public ProductManager(IProductRepository repository)
+        public ProductManager(IProductRepository repository, CategoryManager categoryManager)
         {
             _repository = repository;
         }
