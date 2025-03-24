@@ -38,13 +38,8 @@ namespace ECommerce.UI
 
             var user = context.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
 
-            if (user != null)
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nLogin successful! Welcome, {user.FirstName} ");
+            if (user != null) ;
 
-
-            }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -52,7 +47,7 @@ namespace ECommerce.UI
             }
 
 
-
+            // Admin Panel
             if (user.Role == UserType.Admin)
             {
                 Console.Clear();
@@ -60,8 +55,7 @@ namespace ECommerce.UI
                 Console.WriteLine("1. Work with Products");
                 Console.WriteLine("2. Work with Categories");
                 Console.WriteLine("3. Work with Users");
-                Console.WriteLine("4. Work with Orders");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("0. Exit");
                 Console.Write("Select an option: ");
 
                 string choice= Console.ReadLine();
@@ -73,11 +67,8 @@ namespace ECommerce.UI
                     case "2":
                         CategoryUI.ShowMenu(); break;
                     case "3":
-                        OrderUI.ShowMenu(); break;
-
-                    case "4":
                         UserUI.ShowMenu(); break;
-                    case "5":
+                    case "0":
                         return;
                     default:
                         Console.WriteLine("Invalid selection."); break;
@@ -87,6 +78,8 @@ namespace ECommerce.UI
 
             else
             {
+               
+
 
             }
 

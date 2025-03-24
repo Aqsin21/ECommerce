@@ -81,16 +81,7 @@ namespace ECommerce.UI
                 CategoryId = categoryId
             };
 
-            var result = productManager.Add(createProductDto);
-
-            if (result)
-            {
-                Console.WriteLine("✅ Product added successfully!");
-            }
-            else
-            {
-                Console.WriteLine("❌ Failed to add product.");
-            }
+            
 
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
@@ -98,20 +89,92 @@ namespace ECommerce.UI
 
         private static void UpdateProduct()
         {
-            // ...
+            Console.Write("Enter the product ID to update: ");
+            int productId = int.Parse(Console.ReadLine());
+            var existingProduct = productManager.GetById(productId);
+            if (existingProduct == null)
+            {
+                Console.WriteLine("❌ Product not found.");
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
+                return;
+            }
+            Console.Write($"Enter new name (current: {existingProduct.Name}): ");
+            string newName = Console.ReadLine();
+            Console.Write($"Enter new price (current: {existingProduct.Price}): ");
+            decimal newPrice = decimal.Parse(Console.ReadLine());
+            Console.Write($"Enter new stock quantity (current: {existingProduct.StockQuantity}): ");
+            int newStock = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter new category ID: ");
+            int newCategoryId = int.Parse(Console.ReadLine());
+
+            var updateProductDto = new UpdateProductDto
+            {
+                Id = productId,
+                Name = newName,
+                Price = newPrice,
+                StockQuantity = newStock,
+                CategoryId = newCategoryId
+            };
+
+            productManager.Update(updateProductDto);
+
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
+
+
         }
 
         private static void RemoveProduct()
         {
-
+            Console.Write("Enter the product ID to remove: ");
+            int productId = int.Parse(Console.ReadLine());
+            productManager.Remove(productId);
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
         }
         private static void GetAll()
         {
+            var productDtoList = productManager.GetAll(null, true);
+            if (productDtoList.Count == 0)
+            {
+                Console.WriteLine("❌ No products found.");
+            }
+            else
+            {
+               
+                foreach (var product in productDtoList)
+                {
+                    Console.WriteLine($"ID: {product.Id}, Name: {product.Name}");
+                }
+            }
 
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
         }
 
         private static void GetById()
         {
+            Console.Write("Enter the product ID: ");
+            int productId = int.Parse(Console.ReadLine());
+            var productDto = productManager.GetById(productId);
+
+            
+            if (productDto == null)
+            {
+                Console.WriteLine("❌ Product not found.");
+            }
+            else
+            {
+               
+                Console.WriteLine($"ID: {productDto.Id}");
+                Console.WriteLine($"Name: {productDto.Name}");
+                
+            }
+
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
 
         }
     }
