@@ -17,6 +17,8 @@ namespace ECommerce.UI
         static void Main(string[] args)
         {
             var context = new AppDbContext();
+            var orderManager = new OrderManager(
+                new OrderRepository(context));
             var productManager = new ProductManager(
             new ProductRepository(context),
             new CategoryManager(new CategoryRepository(context)));
@@ -78,9 +80,61 @@ namespace ECommerce.UI
 
             else
             {
+                Console.Clear();
+                Console.WriteLine("Hello User");
+                Console.WriteLine("1. Get All Products");
+                Console.WriteLine("2. Get All Categories");
+                Console.WriteLine("3. Get Orders");
+                Console.WriteLine("4. Get products in basket");
+                Console.WriteLine("0 Back to Main Menu");
+                string choice=Console.ReadLine();
+                  // Normalde DI ile enjekte edilmeli
                
+               
+                
 
+                switch (choice)
+                {
+                    case "1":
+                        var products = productManager.GetAll(x=>true ,true);
+                        Console.WriteLine("All Products:");
+                        foreach (var product in products)
+                        {
+                            Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Price: {product.Price}");
+                        }
+                        break;
 
+                    case "2":
+                        var categories = categoryManager.GetAll(x=>true ,true);
+                        Console.WriteLine("All Categories:");
+                        foreach (var category in categories)
+                        {
+                            Console.WriteLine($"ID: {category.Id}, Name: {category.Name}");
+                        }
+                        break;
+
+                    case "3":
+                        var orders = orderManager.GetAll(x => true, true);
+                        Console.WriteLine("Your Orders:");
+                        foreach (var order in orders)
+                        {
+                            Console.WriteLine($"Order ID: {order.Id}, Total Price: {order.TotalAmount}");
+                        }
+                        break;
+
+                    //case "4":
+                    //    var basketItems = basketService.GetProducts();
+                    //    Console.WriteLine("Products in your basket:");
+                    //    foreach (var item in basketItems)
+                    //    {
+                    //        Console.WriteLine($"Product ID: {item.ProductId}, Name: {item.ProductName}, Quantity: {item.Quantity}");
+                    //    }
+                    //    break;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please select a valid option.");
+                        break;
+                }
             }
 
 
