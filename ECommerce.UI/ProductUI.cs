@@ -46,7 +46,8 @@ namespace ECommerce.UI
                         GetAll(); break;
                     case "5":
                         GetById(); break;
-                    case "6": 
+                    case "6":
+                        return;
                         break; 
                       
                     default:

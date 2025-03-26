@@ -140,7 +140,7 @@ namespace ECommerce.UI
             var userDtoList = userManager.GetAll(null, true);
             if (userDtoList.Count == 0)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor= ConsoleColor.Red;
                 Console.WriteLine("❌ No categories found.");
             }
             else
@@ -165,7 +165,6 @@ namespace ECommerce.UI
 
             if (userDto == null)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("❌ User not found.");
             }
             else

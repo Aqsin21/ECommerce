@@ -6,6 +6,7 @@ using ECommerce.Infrastructure.EfCore.Context;
 using ECommerce.Application.Interfaces;
 using ECommerce.Application.Services;
 using ECommerce.Domain.Interfaces;
+using Microsoft.Identity.Client;
 
 namespace ECommerce.UI
 {
@@ -14,7 +15,7 @@ namespace ECommerce.UI
 
 
 
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
             var context = new AppDbContext();
             var orderManager = new OrderManager(
@@ -48,45 +49,26 @@ namespace ECommerce.UI
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nWrong password or Username!");
-                
+
             }
 
 
             // Admin Panel
             if (user.Role == UserType.Admin)
             {
-               
-             
-                    Console.Clear();
-                    Console.WriteLine("=== 🧠 Admin Panel ===");
-                    Console.WriteLine("1. Work with Products");
-                    Console.WriteLine("2. Work with Categories");
-                    Console.WriteLine("3. Work with Users");
-                    Console.WriteLine("0. Exit");
-                    Console.Write("Select an option: ");
-                    string choice = Console.ReadLine();
+                AdminPanel();
 
-                switch (choice)
-                    {
-                        case "1":
-                            ProductUI.ShowMenu(); break;
-                        case "2":
-                            CategoryUI.ShowMenu(); break;
-                        case "3":
-                            UserUI.ShowMenu(); break;
-                        case "0":
-                            return;
-                        default:
-                            Console.WriteLine("Invalid selection."); break;
-                    }
 
-                }
-             
-            
+            }
+
+
+
 
 
             else
             {
+
+
 
                 while (true)
                 {
@@ -160,68 +142,112 @@ namespace ECommerce.UI
                     Console.ReadKey();
                 }
 
+
+            }
+
+        }
+
+        static void AdminPanel()
+        {
+            bool exitAdminPanel = false;
+
+            while (!exitAdminPanel)
+            {
+                Console.Clear();
+                Console.WriteLine("=== 🧠 Admin Panel ===");
+                Console.WriteLine("1. Work with Products");
+                Console.WriteLine("2. Work with Categories");
+                Console.WriteLine("3. Work with Users");
+                Console.WriteLine("0. Exit");
+                Console.Write("Select an option: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        ProductUI.ShowMenu(); break;
+                    case "2":
+                        CategoryUI.ShowMenu(); break;
+                    case "3":
+                        UserUI.ShowMenu(); break;
+                    case "0":
+                        exitAdminPanel = true; break;
+                    default:
+                        Console.WriteLine("Invalid selection.");
+                        break;
+                }
+
+                if (!exitAdminPanel)
+                {
+                    Console.WriteLine("\nPress any key to return to the menu...");
+                    Console.ReadKey();
+                }
             }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
+
+
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
