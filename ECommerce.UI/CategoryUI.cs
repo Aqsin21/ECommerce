@@ -18,6 +18,7 @@ namespace ECommerce.UI
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("=== 🛍️ Category  Menu ===");
                 Console.WriteLine("1. Add Category");
                 Console.WriteLine("2. Update Category");
@@ -44,6 +45,7 @@ namespace ECommerce.UI
                     case "6":
                         return;
                     default:
+                        Console.ForegroundColor= ConsoleColor.Red;
                         Console.WriteLine("❌ Invalid choice."); break;
                 }
 
@@ -66,6 +68,8 @@ namespace ECommerce.UI
                 Name = name,
                
             };
+
+            categoryManager.Add(createCategoryDto);
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
 
@@ -78,6 +82,7 @@ namespace ECommerce.UI
             var existingCategory = categoryManager.GetById(categoryId);
             if (existingCategory == null)
             {
+                Console.ForegroundColor= ConsoleColor.Red;
                 Console.WriteLine("❌ Category not found.");
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
@@ -111,6 +116,7 @@ namespace ECommerce.UI
             var categoryDtoList = categoryManager.GetAll(null, true);
             if (categoryDtoList.Count == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("❌ No categories found.");
             }
             else
@@ -135,6 +141,7 @@ namespace ECommerce.UI
 
             if (categoryDto == null)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("❌ Product not found.");
             }
             else

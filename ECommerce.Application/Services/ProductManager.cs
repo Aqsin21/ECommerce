@@ -32,10 +32,6 @@ namespace ECommerce.Application.Services
 
             _repository.Add(product);
 
-
-           
-
-
         }
 
         public ProductDto Get(Expression<Func<Product, bool>> predicate)
@@ -61,7 +57,9 @@ namespace ECommerce.Application.Services
                 productDtoList.Add(new ProductDto
                 {
                     Id = item.Id,
-                    Name = item.Name
+                    Name = item.Name,
+                    Price = item.Price
+                    
                 });
 
             }

@@ -13,13 +13,16 @@ namespace ECommerce.UI
             new ProductRepository(context),
             new CategoryManager(new CategoryRepository(context))
         );
+        
 
         public static void ShowMenu()
         {
 
+
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("=== 🛍️ Product Menu ===");
                 Console.WriteLine("1. Add Product");
                 Console.WriteLine("2. Update Product");
@@ -43,9 +46,11 @@ namespace ECommerce.UI
                         GetAll(); break;
                     case "5":
                         GetById(); break;
-                    case "6":
-                        return;
+                    case "6": 
+                        break; 
+                      
                     default:
+                        Console.ForegroundColor= ConsoleColor.Red;
                         Console.WriteLine("❌ Invalid choice."); break;
                 }
 
@@ -64,6 +69,9 @@ namespace ECommerce.UI
             Console.Write("Enter product name: ");
             string name = Console.ReadLine();
 
+            Console.Write("Enter product Description: ");
+            string desc = Console.ReadLine();
+
             Console.Write("Enter price: ");
             decimal price = decimal.Parse(Console.ReadLine());
 
@@ -78,9 +86,11 @@ namespace ECommerce.UI
                 Name = name,
                 Price = price,
                 StockQuantity = stock,
-                CategoryId = categoryId
+                CategoryId = categoryId,
+                Description= desc
             };
 
+            productManager.Add(createProductDto);
             
 
             Console.WriteLine("Press Enter to continue...");
@@ -94,6 +104,7 @@ namespace ECommerce.UI
             var existingProduct = productManager.GetById(productId);
             if (existingProduct == null)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("❌ Product not found.");
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
@@ -139,6 +150,7 @@ namespace ECommerce.UI
             var productDtoList = productManager.GetAll(null, true);
             if (productDtoList.Count == 0)
             {
+                Console.ForegroundColor= ConsoleColor.Red;
                 Console.WriteLine("❌ No products found.");
             }
             else
@@ -146,7 +158,7 @@ namespace ECommerce.UI
                
                 foreach (var product in productDtoList)
                 {
-                    Console.WriteLine($"ID: {product.Id}, Name: {product.Name}");
+                    Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Price:{product.Price}");
                 }
             }
 
@@ -163,6 +175,7 @@ namespace ECommerce.UI
             
             if (productDto == null)
             {
+                Console.ForegroundColor= ConsoleColor.Red;
                 Console.WriteLine("❌ Product not found.");
             }
             else

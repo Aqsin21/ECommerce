@@ -19,6 +19,7 @@ namespace ECommerce.UI
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("=== 🛍️ User  Menu ===");
                 Console.WriteLine("1. Add User");
                 Console.WriteLine("2. Update User");
@@ -45,6 +46,7 @@ namespace ECommerce.UI
                     case "6":
                         return;
                     default:
+                        Console.ForegroundColor= ConsoleColor.Red;
                         Console.WriteLine("❌ Invalid choice."); break;
                 }
 
@@ -91,6 +93,7 @@ namespace ECommerce.UI
             var existingUser = userManager.GetById(userId);
             if (existingUser == null)
             {
+                Console.ForegroundColor=ConsoleColor.Red;
                 Console.WriteLine("❌ User not found.");
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
@@ -137,6 +140,7 @@ namespace ECommerce.UI
             var userDtoList = userManager.GetAll(null, true);
             if (userDtoList.Count == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("❌ No categories found.");
             }
             else
@@ -161,6 +165,7 @@ namespace ECommerce.UI
 
             if (userDto == null)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("❌ User not found.");
             }
             else
