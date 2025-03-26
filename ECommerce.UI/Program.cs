@@ -19,6 +19,8 @@ namespace ECommerce.UI
             var context = new AppDbContext();
             var orderManager = new OrderManager(
                 new OrderRepository(context));
+            var basketManager = new BasketManager(
+                new BasketRepository(context));
             var productManager = new ProductManager(
             new ProductRepository(context),
             new CategoryManager(new CategoryRepository(context)));
@@ -88,7 +90,7 @@ namespace ECommerce.UI
                 Console.WriteLine("4. Get products in basket");
                 Console.WriteLine("0 Back to Main Menu");
                 string choice=Console.ReadLine();
-                  // Normalde DI ile enjekte edilmeli
+                 
                
                
                 
@@ -96,13 +98,22 @@ namespace ECommerce.UI
                 switch (choice)
                 {
                     case "1":
-                        var products = productManager.GetAll(x=>true ,true);
-                        Console.WriteLine("All Products:");
+                        var products = productManager.GetAll(x => true, true);
+                        Console.WriteLine("\nAll Products:");
                         foreach (var product in products)
                         {
                             Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Price: {product.Price}");
                         }
+
+                        Console.Write("Enter the ID of the product to add to basket (or 0 to cancel): ");
+                        int selectedProductId = int.Parse(Console.ReadLine());
+
+                        if (selectedProductId != 0)
+                        {
+                            productManager.AddToBasket(selectedProductId);
+                        }
                         break;
+                        
 
                     case "2":
                         var categories = categoryManager.GetAll(x=>true ,true);
@@ -122,14 +133,10 @@ namespace ECommerce.UI
                         }
                         break;
 
-                    //case "4":
-                    //    var basketItems = basketService.GetProducts();
-                    //    Console.WriteLine("Products in your basket:");
-                    //    foreach (var item in basketItems)
-                    //    {
-                    //        Console.WriteLine($"Product ID: {item.ProductId}, Name: {item.ProductName}, Quantity: {item.Quantity}");
-                    //    }
-                    //    break;
+                    case "4":
+                        productManager.ShowBasket();
+                        break;
+                        break;
 
                     default:
                         Console.WriteLine("Invalid choice. Please select a valid option.");

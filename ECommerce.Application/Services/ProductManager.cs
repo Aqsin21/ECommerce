@@ -11,6 +11,8 @@ namespace ECommerce.Application.Services
     {
         private readonly IProductRepository _repository;
 
+        private readonly List<ProductDto> _basket = new List<ProductDto>();
+
         public ProductManager(IProductRepository repository, CategoryManager categoryManager)
         {
             _repository = repository;
@@ -97,6 +99,45 @@ namespace ECommerce.Application.Services
             };
 
             _repository.Update(product);
+        }
+
+
+
+        public void AddToBasket(int productId)
+        {
+            var product = _repository.GetById(productId);
+
+            if (product == null)
+            {
+                Console.WriteLine("❌ Product not found!");
+                return;
+            }
+
+            var productDto = new ProductDto
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price
+            };
+
+            _basket.Add(productDto);
+            Console.WriteLine($"✓ {product.Name} added to basket.");
+        }
+
+
+        public void ShowBasket()
+        {
+            Console.WriteLine("\n🛒 Basket Items:");
+            if (_basket.Count == 0)
+            {
+                Console.WriteLine("Your basket is empty.");
+                return;
+            }
+
+            foreach (var item in _basket)
+            {
+                Console.WriteLine($"- {item.Name} | {item.Price}$");
+            }
         }
     }
 }
