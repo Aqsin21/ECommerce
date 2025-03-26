@@ -84,6 +84,11 @@ namespace ECommerce.UI
                 Email= email
 
             };
+            userManager.Add(createUserDto);
+
+
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
         }
 
         private static void UpdateUser()
