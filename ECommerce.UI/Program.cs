@@ -166,10 +166,13 @@ namespace ECommerce.UI
                         {
                             Console.WriteLine("Canceled this order.");
                         }
+                        Console.Clear();
                         break;
 
                     case "0":
+
                         Console.WriteLine("Log outing");
+                        Console.Clear();
                         return; 
                         
 
