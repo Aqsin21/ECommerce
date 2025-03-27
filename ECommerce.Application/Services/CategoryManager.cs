@@ -18,6 +18,11 @@ namespace ECommerce.Application.Services
 
         public void Add(CreateCategoryDto createDto)
         {
+            var existingCategory=_repository.Get(c=>c.Name == createDto.Name);
+            if(existingCategory != null)
+            {
+                throw new Exception("Warning: A category with the same name already exists!");
+            }
             var category = new Category 
             {
                 Name = createDto.Name
@@ -80,13 +85,11 @@ namespace ECommerce.Application.Services
 
         public void Update(UpdateCategoryDto updateDto)
         {
-            var category = new Category
-            {
-                Id=updateDto.Id,
-                Name = updateDto.Name,
-            };
+           var existingCategory= _repository.GetById(updateDto.Id);
+            if (existingCategory == null) throw new Exception("Category Not found");
+            existingCategory.Name = updateDto.Name;
 
-            _repository.Update(category);
+            _repository.Update(existingCategory);
 
         }
 

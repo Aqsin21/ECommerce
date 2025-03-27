@@ -8,15 +8,20 @@ namespace ECommerce.Application.Services
 {
     public class UserManager : IUserService
     {
-        private readonly IUserRepository _reposiotry;
+        private readonly IUserRepository _repository;
 
         public UserManager(IUserRepository reposiotry)
         {
-            _reposiotry = reposiotry;
+            _repository = reposiotry;
         }
 
         public void Add(CreateUserDto createDto)
         {
+            var existingUser=_repository.Get(u=>u.UserName == createDto.UserName);
+            if (existingUser != null)
+            {
+                throw new Exception("Username is used");
+            }
            var user= new User();
             {
                 user.UserName=createDto.UserName;
@@ -25,12 +30,12 @@ namespace ECommerce.Application.Services
                 user.LastName = createDto.LastName;
                 user.Address = createDto.Address;
             }
-
+            _repository.Add(user);
         }
 
         public UserDto Get(Expression<Func<User, bool>> predicate)
         {
-            var user = _reposiotry.Get(predicate);
+            var user = _repository.Get(predicate);
             var userDto = new UserDto
              { 
                 UserName = user.UserName,
@@ -47,7 +52,7 @@ namespace ECommerce.Application.Services
 
         public List<UserDto> GetAll(Expression<Func<User, bool>>? predicate, bool AsNoTracking)
         {
-           var user =_reposiotry.GetAll(predicate, AsNoTracking);
+           var user =_repository.GetAll(predicate, AsNoTracking);
            var userDtoList = new List<UserDto>();
             foreach ( var item in user)
             {
@@ -68,7 +73,7 @@ namespace ECommerce.Application.Services
 
         public UserDto GetById(int id)
         {
-           var user = _reposiotry.GetById(id);
+           var user = _repository.GetById(id);
             var userDto = new UserDto
            { 
                 UserName = user.UserName,
@@ -84,10 +89,10 @@ namespace ECommerce.Application.Services
 
         public void Remove(int id)
         {
-            var existEntity=_reposiotry.GetById(id);
+            var existEntity=_repository.GetById(id);
             if (existEntity == null) throw new Exception("Not found");
 
-            _reposiotry.Remove(existEntity);
+            _repository.Remove(existEntity);
         }
 
         public void Update(UpdateUserDto updateDto)
@@ -102,7 +107,7 @@ namespace ECommerce.Application.Services
                 Email = updateDto.Email
 
             };
-           _reposiotry.Update(user);
+           _repository.Update(user);
         }
     }
 }

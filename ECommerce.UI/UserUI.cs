@@ -21,12 +21,8 @@ namespace ECommerce.UI
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("=== 🛍️ User  Menu ===");
-                Console.WriteLine("1. Add User");
-                Console.WriteLine("2. Update User");
-                Console.WriteLine("3. Delete User");
-                Console.WriteLine("4. List All Users");
-                Console.WriteLine("5. List By Id User");
-                Console.WriteLine("6. Back to Main Menu");
+                Console.WriteLine("1. Change Rol  User");
+                Console.WriteLine("2. Back to Main Menu");
                 Console.Write("Select an option: ");
 
                 string choice = Console.ReadLine();
@@ -34,16 +30,9 @@ namespace ECommerce.UI
                 switch (choice)
                 {
                     case "1":
-                        AddUser(); break;
+                         break;
+                  
                     case "2":
-                        UpdateUser(); break;
-                    case "3":
-                        RemoveUser(); break;
-                    case "4":
-                        GetAll(); break;
-                    case "5":
-                        GetById(); break;
-                    case "6":
                         return;
                     default:
                         Console.ForegroundColor= ConsoleColor.Red;

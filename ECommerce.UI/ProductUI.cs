@@ -113,6 +113,8 @@ namespace ECommerce.UI
             }
             Console.Write($"Enter new name (current: {existingProduct.Name}): ");
             string newName = Console.ReadLine();
+            Console.Write($"Enter new Description (current: {existingProduct.Description}): ");
+            string newDesc = Console.ReadLine();
             Console.Write($"Enter new price (current: {existingProduct.Price}): ");
             decimal newPrice = decimal.Parse(Console.ReadLine());
             Console.Write($"Enter new stock quantity (current: {existingProduct.StockQuantity}): ");
@@ -127,7 +129,8 @@ namespace ECommerce.UI
                 Name = newName,
                 Price = newPrice,
                 StockQuantity = newStock,
-                CategoryId = newCategoryId
+                CategoryId = newCategoryId,
+                Description=newDesc
             };
 
             productManager.Update(updateProductDto);
