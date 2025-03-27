@@ -1,12 +1,8 @@
 ﻿using ECommerce.Domain.Entities;
-using ECommerce.Application.DTOs;
-using Microsoft.EntityFrameworkCore;
 using ECommerce.Infrastructure.EfCore;
 using ECommerce.Infrastructure.EfCore.Context;
-using ECommerce.Application.Interfaces;
 using ECommerce.Application.Services;
-using ECommerce.Domain.Interfaces;
-using Microsoft.Identity.Client;
+
 
 namespace ECommerce.UI
 {

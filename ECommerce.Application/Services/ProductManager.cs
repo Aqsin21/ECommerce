@@ -2,9 +2,6 @@
 using ECommerce.Application.Interfaces;
 using ECommerce.Domain.Entities;
 using ECommerce.Domain.Interfaces;
-using ECommerce.Infrastructure.Migrations;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using System.Linq.Expressions;
 
 namespace ECommerce.Application.Services
